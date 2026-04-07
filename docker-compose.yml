@@ -1,0 +1,54 @@
+
+
+networks:
+  dns-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+services:
+
+  root-ns:
+    build: ./root-ns
+    container_name: root-ns
+    hostname: root-ns
+    networks:
+      dns-net:
+        ipv4_address: 172.20.0.2
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+  tld-ns:
+    build: ./tld-ns
+    container_name: tld-ns
+    hostname: tld-ns
+    networks:
+      dns-net:
+        ipv4_address: 172.20.0.3
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+  auth-ns:
+    build: ./auth-ns
+    container_name: auth-ns
+    hostname: auth-ns
+    networks:
+      dns-net:
+        ipv4_address: 172.20.0.4
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+  resolver:
+    build: ./resolver
+    container_name: resolver
+    hostname: resolver
+    networks:
+      dns-net:
+        ipv4_address: 172.20.0.5
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped

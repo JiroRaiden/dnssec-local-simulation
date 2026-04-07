@@ -1,0 +1,14 @@
+$TTL 86400
+lab. IN SOA tld-ns.lab. admin.lab. (
+    2024010101 ; serial
+    3600       ; refresh
+    900        ; retry
+    604800     ; expire
+    86400 )    ; minimum
+
+lab.         IN NS  tld-ns.lab.
+tld-ns.lab.  IN A   172.20.0.3
+
+; delegation to auth-ns for example.lab.
+example.lab. IN NS  auth-ns.example.lab.
+auth-ns.example.lab. IN A 172.20.0.4

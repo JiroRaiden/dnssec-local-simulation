@@ -1,0 +1,13 @@
+# DNSSEC keys
+*.private
+*.key
+
+# BIND runtime files
+*.jnl
+
+# Docker
+*.log
+
+# OS junk
+.DS_Store
+
